@@ -10,17 +10,64 @@ Feel free to contribute to the project through pull requests or issues - any hel
 ## Installation & Usage
 
 ### Docker run
+You can run dynnie using docker run. The following example shows how to run dynnie using docker run. Note that you need to specify all required environment variables. See the configuration section below for more information.
+Before you run dynnie, you want to clone the repository and build the docker image. You can also use the prebuilt image from dockerhub (simongaugler/dynnie), although it is currently only available for ARM-Architectures.
 
 ```bash
-docker run 
+git clone git@github.com:simon-gaugler/dynnie.git && cd dynnie
+docker build -t dynnie .
+docker run -d \
+    --name=dynnie-example-com \
+    -e SERVICE_URL="members.dyndns.org/v3/update" \
+    -e USERNAME="example-com-User" \
+    -e PASSWORD="securePass" \
+    -e HOSTNAME="example.com" \
+    dynnie
 ```
 
 
 
-### Docker compose
+### Docker compose (minimal config)
 
 ```yaml
+version: "3.3"
+services:
+  dynnie:
+    image: dynnie
+    container_name: dynnie-example-com
+    environment:
+      - SERVICE_URL="members.dyndns.org/v3/update"
+      - USERNAME="example-com-User"
+      - PASSWORD="securePass"
+      - HOSTNAME="example.com"
+    restart: unless-stopped
+```
 
+### Docker compose (full config)
+
+```yaml
+version: "3.3"
+services:
+  dynnie:
+    image: dynnie
+    container_name: dynnie-example-com
+    environment:
+      - SERVICE_URL="members.dyndns.org/v3/update"
+      - USERNAME="example-com-User"
+      - PASSWORD="securePass"
+      - HOSTNAME="example.com"
+      - INTERVAL_SEC=120
+      - SERVICE=dyndns
+      - DETECT_IP_V4=true
+      - DETECT_IP_V6=false
+      #- SET_IP_V4=127.0.0.1
+      - SET_IP_V6=::1
+      - UPDATE_IP_V6=true
+      - URL_VAR_IP_V4=myip
+      - URL_VAR_IP_V6=myipv6
+      - URL_VAR_HOSTNAME=hostname
+      - URL_VAR_APPENDIX="system=dyndns&myVar=myVal"
+    restart: unless-stopped
 ```
 
 
@@ -28,7 +75,7 @@ docker run
 ## Configuration
 
 | Parameter                   | Description                                                  | required                         | default  | Example                      |
-| --------------------------- | ------------------------------------------------------------ | -------------------------------- | -------- | ---------------------------- |
+| ---------------- | ------------------------------------------------------------ | --------------- | -------- | --------------|
 | SERVICE_URL                 | The url of your dynDNS-service ***without*** any protocol (like https://) and without the path parameters. | YES<br />(unless SERVICE is set) | -        | members.dyndns.org/v3/update |
 | USERNAME                    | The username required to update your dnyDNS entry. You will either receive this from your provider, can set one yourself or it may be your accounts username. Check your dynDNS providers documentation. | YES                              | -        | example-com-User             |
 | PASSWORD                    | The password required to update your dynDNS entry. You will either receive this from your provider, can set one yourself or it may be your accounts password. Check your dynDNS providers documentation. | YES                              | -        | securePass                   |

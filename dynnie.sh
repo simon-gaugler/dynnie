@@ -52,7 +52,7 @@ function sendDynDnsUpdate {
 function sleepIntervalTime {
     if [ $INTERVAL_SEC -eq 0 ]
     then
-        break
+        return 0
     else
         sleep "${INTERVAL_SEC}s"
     fi
@@ -93,8 +93,6 @@ function setupDefaultVariables {
     then
         UPDATE_IP_V6="false"
     fi
-
-    
 }
 
 function checkAllRequiredVariablesSet {
@@ -139,18 +137,6 @@ function checkAllRequiredVariablesSet {
         echo "Either automatic detection of ipv6 or manual ipv6 must be configured"
         exit $DYNNIE_ERR_DETECT_IPV6_CONFIG_REQUIRED
     fi
-
-}
-
-function detectIpv4 {
-    echo "Calling Ipify-API for external IPv4"
-    #IP=$(curl -s -4 --connect-timeout 5 "https://api.ipify.org?format=text")
-    
-}
-
-function detectIpv6 {
-    echo "Calling Ipify-API for external IPv6"
-    #IPV6=$(curl -s -6 "https://api6.ipify.org?format=text")
 }
 
 function updateIpAdresses {
@@ -194,7 +180,7 @@ setupDefaultVariables
 applyKnownServiceConfiguration
 checkAllRequiredVariablesSet
 
-# starts the endless update Loop (checking for new IP, updating on change, sleeping intervall)
+# starts the endless update Loop (checking for new IP, updating on change, sleeping interval)
 
 updateLoop
 exit 0
