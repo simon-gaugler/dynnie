@@ -1,0 +1,25 @@
+version: "3"
+services:
+  dynnie:
+    image: simon-gaugler/dynnie
+    environment:
+      - SERVICE_URL="www.ovh.com/nic/update"
+      - USERNAME=user123
+      - PASSWORD=password
+      - HOSTNAME=example.com
+      - INTERVAL_SEC=60
+      #- SERVICE=ovh
+      - DETECT_IP_V4=true
+      - DETECT_IP_V6=false
+      #- SET_IP_V4="127.0.0.1"
+      #- SET_IP_V6=""
+      - UPDATE_IP_V6=false
+      - URL_VAR_IP_V4=myip
+      #- URL_VAR_IP_V6=myipv6
+      - URL_VAR_HOSTNAME=hostname
+      #- URL_VAR_APPENDIX="system=dns"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: "3"
