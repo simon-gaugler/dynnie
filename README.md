@@ -68,15 +68,15 @@ Also, if your Service is not yet available, feel free to add it or let me know -
 
 Dynnie uses specific exit codes for known errors. When the script exits not cleanly, note the error code. Mostly, the error message before should already give a good indication of what's wrong or missing. In the following list you'll find more detailed information for every error code and how to pissibly fix it:
 
-| Error Code | Reason                                 | Description | Possible fixes |
-| ---------- | -------------------------------------- | ----------- | -------------- |
-| 40         | -reserved-                             |             |                |
-| 41         | DYNNIE_ERR_USERNAME_REQUIRED           |             |                |
-| 42         | DYNNIE_ERR_PASSWORD_REQUIRED           |             |                |
-| 43         | DYNNIE_ERR_SERVICE_URL_REQUIRED        |             |                |
-| 44         | DYNNIE_ERR_HOSTNAME_REQUIRED           |             |                |
-| 45         | DYNNIE_ERR_INTERVAL_SEC_REQUIRED       |             |                |
-| 46         | DYNNIE_ERR_DETECT_IP_CONFIG_REQUIRED   |             |                |
-| 47         | DYNNIE_ERR_DETECT_IPV6_CONFIG_REQUIRED |             |                |
-| 48         | -reserved-                             |             |                |
-| 49         | DYNNIE_ERR_SERVICE_UNKNOWN             |             |                |
+| Error Code | Reason                                 | Description                                                  | Possible fixes                                               |
+| ---------- | -------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 40         |                                        | -reserved-                                                   |                                                              |
+| 41         | DYNNIE_ERR_USERNAME_REQUIRED           | You did not specify a username to dynnie via the environment variables or dynnie cannot read/interpret it. | Make sure to specify the username using the correct env-Variable. See the table above. |
+| 42         | DYNNIE_ERR_PASSWORD_REQUIRED           |                                                              |                                                              |
+| 43         | DYNNIE_ERR_SERVICE_URL_REQUIRED        |                                                              |                                                              |
+| 44         | DYNNIE_ERR_HOSTNAME_REQUIRED           |                                                              |                                                              |
+| 45         | DYNNIE_ERR_INTERVAL_SEC_REQUIRED       |                                                              |                                                              |
+| 46         | DYNNIE_ERR_DETECT_IP_CONFIG_REQUIRED   |                                                              |                                                              |
+| 47         | DYNNIE_ERR_DETECT_IPV6_CONFIG_REQUIRED |                                                              |                                                              |
+| 48         |                                        | -reserved-                                                   |                                                              |
+| 49         | DYNNIE_ERR_SERVICE_UNKNOWN             |                                                              |                                                              |
