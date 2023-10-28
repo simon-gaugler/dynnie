@@ -10,8 +10,21 @@ Feel free to contribute to the project through pull requests or issues - any hel
 ## Installation & Usage
 
 ### Docker run
-You can run dynnie using docker run. The following example shows how to run dynnie using docker run. Note that you need to specify all required environment variables. See the configuration section below for more information.
-Before you run dynnie, you want to clone the repository and build the docker image. You can also use the prebuilt image from dockerhub (simongaugler/dynnie), although it is currently only available for ARM-Architectures.
+You can run dynnie using docker run with the pre-built image from DockerHub. Note that you need to specify all required environment variables. See the configuration section below for more information.
+
+
+```bash
+docker run -d \
+    --name=dynnie-example-com \
+    -e SERVICE_URL="members.dyndns.org/v3/update" \
+    -e USERNAME="example-com-User" \
+    -e PASSWORD="securePass" \
+    -e HOSTNAME="example.com" \
+    simongaugler/dynnie
+```
+
+### Build & Run
+If you prefer building the container yourself, you can do so by cloning the repository. Note that you need to specify all required environment variables. See the configuration section below for more information.
 
 ```bash
 git clone git@github.com:simon-gaugler/dynnie.git && cd dynnie
@@ -24,7 +37,6 @@ docker run -d \
     -e HOSTNAME="example.com" \
     dynnie
 ```
-
 
 
 ### Docker compose (minimal config)
@@ -119,7 +131,7 @@ Dynnie uses specific exit codes for known errors. When the script exits not clea
 | ---------- | -------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 40         |                                        | -reserved-                                                   |                                                              |
 | 41         | DYNNIE_ERR_USERNAME_REQUIRED           | You did not specify a username to dynnie via the environment variables or dynnie cannot read/interpret it. | Make sure to specify the username using the correct env-Variable. See the table above. |
-| 42         | DYNNIE_ERR_PASSWORD_REQUIRED           |                                                              |                                                              |
+| 42         | DYNNIE_ERR_PASSWORD_REQUIRED           | You did not specify a password to dynnie via the environment variables or dynnie cannot read/interpret it. |                                                              |
 | 43         | DYNNIE_ERR_SERVICE_URL_REQUIRED        |                                                              |                                                              |
 | 44         | DYNNIE_ERR_HOSTNAME_REQUIRED           |                                                              |                                                              |
 | 45         | DYNNIE_ERR_INTERVAL_SEC_REQUIRED       |                                                              |                                                              |
